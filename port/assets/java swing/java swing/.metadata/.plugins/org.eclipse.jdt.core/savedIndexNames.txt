@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\java swing\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+969798322.index
+1051535478.index
+3988400488.index
+3133397127.index

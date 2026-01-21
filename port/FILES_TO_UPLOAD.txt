@@ -1,0 +1,119 @@
+================================================================================
+  GITHUB UPLOAD CHECKLIST - Upload ONLY These Files
+================================================================================
+
+REQUIRED FILES FOR GITHUB PAGES:
+---------------------------------
+
+1. index.html                           ✅ REQUIRED (Main page)
+2. style.css                            ✅ REQUIRED (Styles)
+3. script.js                            ✅ REQUIRED (JavaScript)
+4. project-attendance.html              ✅ REQUIRED (Project page)
+5. project-ctrp.html                    ✅ REQUIRED (Project page)
+6. project-demo.html                    ✅ REQUIRED (Project page)
+7. README.md                            ✅ REQUIRED (Documentation)
+8. .gitignore                           ✅ REQUIRED (Git config)
+
+ASSETS FOLDER:
+--------------
+9. assets/my-photo.png                  ✅ REQUIRED (Your photo)
+10. assets/Thanigaivel_New_Resume.pdf   ✅ REQUIRED (Your resume)
+
+
+DO NOT UPLOAD THESE FILES:
+--------------------------
+❌ .snapshots/                          (Development folder)
+❌ background-remover.html              (Development tool)
+❌ change_background.py                 (Python script)
+❌ BACKGROUND_CHANGE_INSTRUCTIONS.md    (Dev notes)
+❌ style-THANiX-sASUS.css              (Old backup)
+❌ DEPLOYMENT_GUIDE.md                  (Optional - can upload if you want)
+❌ GITHUB_STRUCTURE.md                  (Optional - can upload if you want)
+❌ QUICK_START.md                       (Optional - can upload if you want)
+❌ deploy-to-github.ps1                 (Optional - can upload if you want)
+❌ FILES_TO_UPLOAD.txt                  (This file - don't upload)
+
+
+TOTAL FILES TO UPLOAD: 10 files
+================================================================================
+
+FOLDER STRUCTURE ON GITHUB:
+---------------------------
+
+portfolio/
+├── index.html
+├── style.css
+├── script.js
+├── project-attendance.html
+├── project-ctrp.html
+├── project-demo.html
+├── README.md
+├── .gitignore
+└── assets/
+    ├── my-photo.png
+    └── Thanigaivel_New_Resume.pdf
+
+
+DEPLOYMENT STEPS:
+-----------------
+
+STEP 1: Create GitHub Repository
+  - Go to: https://github.com/new
+  - Name: portfolio
+  - Public: YES
+  - Don't initialize with README
+  - Click "Create repository"
+
+STEP 2: Upload Files (Choose ONE method)
+
+METHOD A - Using Git (Recommended):
+  1. Open PowerShell in this folder
+  2. Run these commands:
+     
+     git init
+     git add .
+     git commit -m "Initial commit"
+     git remote add origin https://github.com/YOUR-USERNAME/portfolio.git
+     git branch -M main
+     git push -u origin main
+
+METHOD B - Using GitHub Website:
+  1. Go to your repository
+  2. Click "uploading an existing file"
+  3. Drag and drop the 10 files listed above
+  4. Make sure to upload the assets folder too
+  5. Click "Commit changes"
+
+STEP 3: Enable GitHub Pages
+  1. Go to repository Settings
+  2. Click "Pages" in sidebar
+  3. Source: main branch
+  4. Click Save
+  5. Wait 2 minutes
+
+STEP 4: Visit Your Site
+  https://YOUR-USERNAME.github.io/portfolio/
+
+
+IMPORTANT NOTES:
+----------------
+✅ The .gitignore file will automatically exclude unwanted files if using Git
+✅ All file paths are relative, so they'll work on GitHub Pages
+✅ Make sure assets folder is uploaded with both files inside
+✅ Don't rename index.html (GitHub Pages requires this name)
+
+
+VERIFICATION:
+-------------
+After upload, check your repository has:
+[ ] index.html in root
+[ ] style.css in root
+[ ] script.js in root
+[ ] 3 project HTML files in root
+[ ] README.md in root
+[ ] .gitignore in root
+[ ] assets folder with 2 files inside
+
+If all checked, you're ready to enable GitHub Pages!
+
+================================================================================

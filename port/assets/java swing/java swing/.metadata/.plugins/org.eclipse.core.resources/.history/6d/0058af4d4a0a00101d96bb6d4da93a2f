@@ -1,0 +1,47 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SwingExample {
+    public static void main(String[] args) {
+        // Create a new JFrame (window)
+        JFrame frame = new JFrame("Swing Components Example");
+        frame.setSize(400, 300);  // Set window size
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());  // Use FlowLayout for arranging components
+
+        // Create a label
+        JLabel label = new JLabel("Enter your name:");
+
+        // Create a text field for user input
+        JTextField textField = new JTextField(15);
+
+        // Create a button
+        JButton greetButton = new JButton("Greet");
+
+        // Create another button to clear the text field
+        JButton clearButton = new JButton("Clear");
+
+        // Event handling for "Greet" button
+        greetButton.addActionListener(e -> {
+            String name = textField.getText();
+            if (!name.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Hello, " + name + "!");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Please enter a name.");
+            }
+        });
+
+        // Event handling for "Clear" button
+        clearButton.addActionListener(e -> textField.setText(""));
+
+        // Add components to the frame
+        frame.add(label);
+        frame.add(textField);
+        frame.add(greetButton);
+        frame.add(clearButton);
+
+        // Make the frame visible
+        frame.setVisible(true);
+    }
+}

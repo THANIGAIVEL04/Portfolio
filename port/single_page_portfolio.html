@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thanigaivel M L - Cybersecurity & Networking Enthusiast Portfolio">
+    <title>Thanix | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* ===========================
+           CSS Variables
+           =========================== */
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --orange-primary: #9d4edd;
+            --orange-glow: rgba(157, 78, 221, 0.6);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #999999;
+
+            --font-primary: 'Poppins', sans-serif;
+
+            --transition: all 0.3s ease;
+        }
+
+        /* ===========================
+           Reset & Base Styles
+           =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Allow custom cursor */
+            cursor: none;
+        }
+
+        /* SHOW DEFAULT CURSOR ON MOBILE */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* ===========================
+           3D Background Canvas
+           =========================== */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===========================
+           Navigation
+           =========================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(157, 78, 221, 0.1);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo .dot {
+            color: var(--orange-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--orange-primary);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--orange-primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* ===========================
+           Hero Section
+           =========================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .greeting {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--orange-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .hero-location {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: var(--orange-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 25px var(--orange-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Profile Image */
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
+
+        .about-image .profile-image {
+            width: 300px;
+            height: 300px;
+        }
+
+        .glow-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+            filter: blur(40px);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .profile-image {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+            border: 3px solid var(--orange-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px var(--orange-glow);
+        }
+
+        /* ===========================
+           Section Styles
+           =========================== */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--orange-primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--orange-primary);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-secondary);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-subtitle {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Skills Dropdown */
+        .skills-dropdown-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .skill-dropdown-item {
+            position: relative;
+        }
+
+        .skill-dropdown-title {
+            color: var(--orange-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            background: rgba(157, 78, 221, 0.05);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skill-dropdown-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--orange-primary);
+            transition: width 0.3s ease;
+        }
+
+        .skill-dropdown-title:hover {
+            background: rgba(157, 78, 221, 0.1);
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 15px var(--orange-glow);
+        }
+
+        .skill-dropdown-title:hover::after {
+            width: 90%;
+        }
+
+        .skill-dropdown-box {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
+            margin-top: 0;
+        }
+
+        .skill-dropdown-item:hover .skill-dropdown-box {
+            max-height: 200px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-top: 0.8rem;
+        }
+
+        .skill-dropdown-text {
+            padding: 1.2rem 1.5rem;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--orange-primary);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Experience */
+        .experience {
+            background: var(--bg-secondary);
+        }
+
+        .experience-standalone {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(157, 78, 221, 0.05);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .experience-item:hover {
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 20px var(--orange-glow);
+        }
+
+        .experience-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
+            border: 2px solid var(--orange-primary);
+            flex-shrink: 0;
+        }
+
+        .experience-icon i {
+            font-size: 1.5rem;
+            color: var(--orange-primary);
+        }
+
+        .experience-details h4 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-description {
+            color: #999999;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .company {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Certifications */
+        .certifications {
+            background: var(--bg-primary);
+        }
+
+        .certifications-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cert-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(157, 78, 221, 0.05);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .cert-item:hover {
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 20px var(--orange-glow);
+        }
+
+        .cert-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
+            border: 2px solid var(--orange-primary);
+            flex-shrink: 0;
+        }
+
+        .cert-icon i {
+            font-size: 1.2rem;
+            color: var(--orange-primary);
+        }
+
+        .cert-details h4 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            padding: 2.5rem;
+            background: rgba(157, 78, 221, 0.05);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 30px var(--orange-glow);
+            transform: translateY(-10px);
+        }
+
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 50%;
+            border: 2px solid var(--orange-primary);
+        }
+
+        .project-icon i {
+            font-size: 2.5rem;
+            color: var(--orange-primary);
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-view-project {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            border: 2px solid #9d4edd;
+            border-radius: 25px;
+            color: #9d4edd;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-view-project:hover {
+            background: rgba(157, 78, 221, 0.1);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--bg-secondary);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-icons-minimal {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .icon-minimal {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #9d4edd;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .icon-minimal i {
+            font-size: 1.3rem;
+            color: #9d4edd;
+            transition: all 0.3s ease;
+        }
+
+        .icon-minimal:hover {
+            background: rgba(157, 78, 221, 0.1);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .icon-minimal:hover i {
+            transform: scale(1.1);
+        }
+
+        .phone-number {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 1.1rem;
+            color: #cccccc;
+            letter-spacing: 1px;
+        }
+
+        /* MERGED PROJECTS STYLES */
+        .project-view {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            background: #000000;
+            padding: 8rem 2rem 5rem 2rem;
+            /* Added top padding */
+            z-index: 2000;
+        }
+
+        .project-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            border: 2px solid #9d4edd;
+            color: #9d4edd;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: rgba(157, 78, 221, 0.1);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(157, 78, 221, 0.05);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 10px;
+        }
+
+        .project-section h2 {
+            font-size: 1.5rem;
+            color: #9d4edd;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            padding: 0.6rem 1.5rem;
+            background: rgba(157, 78, 221, 0.1);
+            border: 2px solid #9d4edd;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            color: #9d4edd;
+            font-weight: 500;
+        }
+
+        .explanation {
+            margin-bottom: 1.5rem;
+        }
+
+        .explanation h3 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .explanation p {
+            font-size: 1rem;
+            color: #cccccc;
+            line-height: 1.7;
+        }
+
+        .download-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #9d4edd;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .overview {
+            font-size: 1.1rem;
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Cursor / Mobile */
+        #cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10001;
+            opacity: 1;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #a020f0;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10002;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #a020f0, 0 0 20px rgba(160, 32, 240, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        .cursor-dot.hover {
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            box-shadow: 0 0 15px #a020f0, 0 0 30px #a020f0;
+        }
+
+        @media (max-width: 768px) {
+
+            .cursor-dot,
+            #cursor-trail {
+                display: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.98);
+                width: 100%;
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: var(--transition);
+                border-top: 1px solid rgba(157, 78, 221, 0.2);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Custom Cursor System -->
+    <canvas id="cursor-trail"></canvas>
+    <div class="cursor-dot"></div>
+
+    <!-- MAIN PORTFOLIO -->
+    <div id="main-portfolio">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">Portfolio<span class="dot">.</span></div>
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#skills" class="nav-link">Skills</a></li>
+                        <li><a href="#experience" class="nav-link">Experience</a></li>
+                        <li><a href="#projects" class="nav-link">Projects</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <p class="greeting">Hello,</p>
+                        <h1 class="hero-title">I'm Thanix</h1>
+                        <p class="hero-subtitle">Cybersecurity & Networking Enthusiast</p>
+                        <p class="hero-location">From Coimbatore, India</p>
+                        <a href="#contact" class="btn-primary">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <div class="glow-circle"></div>
+                        <div class="profile-image">
+                            <img src="assets/my-photo.png" alt="Thanigaivel Profile Photo">
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <h3 class="about-subtitle"></h3>
+                        <p class="about-description">
+                            I'm an aspiring cybersecurity student with strong foundations in secure development,
+                            networking, protocol analysis, and web technologies. I enjoy exploring transport protocols,
+                            network behavior, and secure system design.
+                        </p>
+                        <p class="about-description">
+                            With hands-on experience in penetration testing tools, network analysis, and secure coding
+                            practices, I'm passionate about building robust and secure systems. My journey in
+                            cybersecurity
+                            combines theoretical knowledge with practical implementation across various domains.
+                        </p>
+                        <a href="assets/Thanigaivel_New_Resume.pdf" class="btn-primary" download>Download Resume</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2 class="section-title">My Skills</h2>
+                <div class="skills-dropdown-container">
+                    <div class="skill-dropdown-item">
+                        <h3 class="skill-dropdown-title">Programming</h3>
+                        <div class="skill-dropdown-box">
+                            <p class="skill-dropdown-text">C | C++ | Python | Java</p>
+                        </div>
+                    </div>
+                    <div class="skill-dropdown-item">
+                        <h3 class="skill-dropdown-title">Tools</h3>
+                        <div class="skill-dropdown-box">
+                            <p class="skill-dropdown-text">Wireshark | Burp Suite | VS Code</p>
+                        </div>
+                    </div>
+                    <div class="skill-dropdown-item">
+                        <h3 class="skill-dropdown-title">Operating System</h3>
+                        <div class="skill-dropdown-box">
+                            <p class="skill-dropdown-text">Linux | Windows</p>
+                        </div>
+                    </div>
+                    <div class="skill-dropdown-item">
+                        <h3 class="skill-dropdown-title">Scripting</h3>
+                        <div class="skill-dropdown-box">
+                            <p class="skill-dropdown-text">Bash</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <div class="container">
+                <h2 class="section-title">Experience</h2>
+                <div class="experience-standalone">
+                    <div class="experience-item">
+                        <div class="experience-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="experience-details">
+                            <h4>Web Designing</h4>
+                            <p class="company">Atozerv Pvt Ltd</p>
+                            <p class="experience-description">Completed a web designing internship with hands-on
+                                experience
+                                in HTML and CSS. Worked on creating responsive and user-friendly web pages, improving
+                                layout
+                                structure, and understanding basic UI/UX principles. Gained practical exposure to
+                                real-world
+                                web development workflows and collaborative environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="certifications">
+            <div class="container">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-list">
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="cert-details">
+                            <h4>Introduction to Cyber Security</h4>
+                            <p>Cisco</p>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="cert-details">
+                            <h4>Computer Hardware Basics</h4>
+                            <p>Cisco</p>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="cert-details">
+                            <h4>Threat Analysis Using Wireshark</h4>
+                            <p>Prompt Infotech</p>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="cert-details">
+                            <h4>Linux</h4>
+                            <p>IIT Bombay</p>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="cert-details">
+                            <h4>Ethical Hacking</h4>
+                            <p>NPTEL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3>College Attendance Portal</h3>
+                        <p>A comprehensive attendance management system built with Java Swing and MySQL,
+                            featuring student tracking, report generation, and administrative controls.</p>
+                        <a href="#" onclick="showProject('attendance'); return false;" class="btn-view-project">View
+                            Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>CTRP – Controlled Transport Protocol</h3>
+                        <p>A research-oriented transport layer protocol designed to provide transparent network behavior
+                            visibility, real-time observability of traffic flow, and improved understanding of
+                            congestion
+                            conditions.</p>
+                        <a href="#" onclick="showProject('ctrp'); return false;" class="btn-view-project">View
+                            Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact Me</h2>
+                <div class="contact-content">
+                    <div class="contact-icons-minimal">
+                        <a href="https://www.linkedin.com/in/thanigaivel-lb-1b7729285/" target="_blank"
+                            class="icon-minimal">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/THANIGAIVEL04" target="_blank" class="icon-minimal">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=thanix0610@gmail.com" target="_blank"
+                            class="icon-minimal">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="phone-number">+91 9597027646</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 Thanigaivel M L. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PROJECT MODAL: ATTENDANCE -->
+    <div id="project-attendance" class="project-view">
+        <div class="project-container">
+            <a href="#" onclick="hideProject()" class="back-btn">← Back to Portfolio</a>
+
+            <h1>College Attendance Portal</h1>
+
+            <p class="overview">
+                A comprehensive attendance management system built with Java Swing and MySQL,
+                featuring student tracking, report generation, and administrative controls.
+            </p>
+
+            <div class="project-section">
+                <h2>Technologies & Software Used</h2>
+                <div class="tech-tags">
+                    <span class="tech-tag">Java Swing</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">JDBC</span>
+                    <span class="tech-tag">NetBeans / IDE</span>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Why These Technologies Were Used</h2>
+                <div class="explanation">
+                    <h3>Java Swing</h3>
+                    <p>Used to build the graphical user interface (buttons, forms, windows). Java Swing provides a rich
+                        set of components for creating desktop applications.</p>
+                </div>
+                <div class="explanation">
+                    <h3>MySQL</h3>
+                    <p>Used as the backend database to store student details and attendance records. MySQL provides
+                        reliable data storage.</p>
+                </div>
+                <div class="explanation">
+                    <h3>JDBC</h3>
+                    <p>Used to connect Java Swing with the MySQL database. JDBC acts as a bridge between the application
+                        and database.</p>
+                </div>
+                <div class="explanation">
+                    <h3>IDE (NetBeans / Eclipse)</h3>
+                    <p>Used for building, debugging, and running the application. The IDE provides tools for code
+                        editing and project management.</p>
+                </div>
+            </div>
+
+            <!-- <div class="download-section">
+                <p><em>(Project download disabled to prevent browser security warnings. Please view source on GitHub.)</em></p>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- PROJECT MODAL: CTRP -->
+    <div id="project-ctrp" class="project-view">
+        <div class="project-container">
+            <a href="#" onclick="hideProject()" class="back-btn">← Back to Portfolio</a>
+
+            <h1>CTRP – Controlled Transport Protocol</h1>
+
+            <p class="overview">
+                A research-oriented transport layer protocol designed to provide transparent network behavior
+                visibility, real-time observability of traffic flow, and improved understanding of congestion
+                conditions.
+            </p>
+
+            <div class="project-section">
+                <h2>Technologies & Concepts Used</h2>
+                <div class="tech-tags">
+                    <span class="tech-tag">Rust</span>
+                    <span class="tech-tag">Networking Fundamentals</span>
+                    <span class="tech-tag">Transport Layer Protocol Design</span>
+                    <span class="tech-tag">Packet Flow Monitoring</span>
+                    <span class="tech-tag">Traffic Observability Tools</span>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Why These Technologies Were Used</h2>
+                <div class="explanation">
+                    <h3>Rust</h3>
+                    <p>Selected for its safety, memory security, and performance when building low-level networking
+                        systems. Rust prevents common bugs like null pointer dereferences and buffer overflows.</p>
+                </div>
+                <div class="explanation">
+                    <h3>Transport Protocol Design</h3>
+                    <p>Used to build a custom layer enabling controlled packet flow. This involves designing packet
+                        structures, handshake mechanisms, and flow control algorithms.</p>
+                </div>
+                <div class="explanation">
+                    <h3>Packet Flow Monitoring</h3>
+                    <p>Helps analyze real-time network behavior by tracking packet transmission, acknowledgments, and
+                        retransmissions.</p>
+                </div>
+                <div class="explanation">
+                    <h3>Traffic Observability</h3>
+                    <p>Ensures packet transparency, congestion visibility, and protocol behavior tracking. By exposing
+                        internal protocol state and metrics, CTRP allows researchers to study network conditions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // NAVIGATION LOGIC
+        function showProject(id) {
+            document.getElementById('main-portfolio').style.display = 'none';
+            document.querySelectorAll('.project-view').forEach(el => el.style.display = 'none');
+            const projectView = document.getElementById('project-' + id);
+            if (projectView) {
+                projectView.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function hideProject() {
+            document.querySelectorAll('.project-view').forEach(el => el.style.display = 'none');
+            document.getElementById('main-portfolio').style.display = 'block';
+            window.scrollTo(0, 0); // Or scroll to #projects
+            setTimeout(() => {
+                const projectsSection = document.getElementById('projects');
+                if (projectsSection) projectsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 10);
+        }
+
+        // ===========================
+        // ORIGINAL SCRIPT.JS CONTENT
+        // ===========================
+
+        let scene, camera, renderer, networkGlobe, particles, connections = [], nodes = [], allObjects = [];
+        let mouseX = 0, mouseY = 0;
+        let targetRotationX = 0, targetRotationY = 0;
+
+        function init3DBackground() {
+            const canvas = document.getElementById('bg-canvas');
+            if (!canvas) return; // Safety
+
+            // Scene setup
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            camera.position.z = 25;
+
+            // Create LARGE network globe
+            const globeGeometry = new THREE.SphereGeometry(20, 32, 32);
+            const globeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x9d4edd, wireframe: true, transparent: true, opacity: 0.25
+            });
+            networkGlobe = new THREE.Mesh(globeGeometry, globeMaterial);
+            networkGlobe.position.set(0, 0, -10);
+            scene.add(networkGlobe);
+            allObjects.push(networkGlobe);
+
+            // Add network nodes
+            const nodeCount = 50;
+            const nodeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x9d4edd, emissive: 0x9d4edd, emissiveIntensity: 0.6
+            });
+
+            for (let i = 0; i < nodeCount; i++) {
+                const phi = Math.acos(-1 + (2 * i) / nodeCount);
+                const theta = Math.sqrt(nodeCount * Math.PI) * phi;
+                const x = 20 * Math.cos(theta) * Math.sin(phi);
+                const y = 20 * Math.sin(theta) * Math.sin(phi);
+                const z = 20 * Math.cos(phi);
+                const node = new THREE.Mesh(new THREE.SphereGeometry(0.4, 8, 8), nodeMaterial.clone());
+                node.position.set(x, y, z);
+                nodes.push(node);
+                networkGlobe.add(node);
+            }
+
+            // Connections
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0x9d4edd, transparent: true, opacity: 0.15 });
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    if (Math.random() > 0.88) {
+                        const points = [nodes[i].position.clone(), nodes[j].position.clone()];
+                        const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), lineMaterial);
+                        connections.push(line);
+                        networkGlobe.add(line);
+                    }
+                }
+            }
+
+            // Extra elements (shields, hexes, particles) - simplified for single file to ensure stability but keeping main visuals
+            // ... (Keeping core loop) ...
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 4000;
+            const posArray = new Float32Array(particlesCount * 3);
+            for (let i = 0; i < particlesCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 200;
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particles = new THREE.Points(particlesGeometry, new THREE.PointsMaterial({ size: 0.15, color: 0x9d4edd, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending }));
+            scene.add(particles);
+
+            // Lighting
+            scene.add(new THREE.AmbientLight(0x9d4edd, 0.5));
+            const pl1 = new THREE.PointLight(0x9d4edd, 1.5); pl1.position.set(30, 30, 20); scene.add(pl1);
+
+            animate3D();
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            targetRotationY = mouseX * 0.0003;
+            targetRotationX = mouseY * 0.0002;
+
+            if (networkGlobe) {
+                networkGlobe.rotation.y += 0.0015 + (targetRotationY - networkGlobe.rotation.y) * 0.05;
+                networkGlobe.rotation.x += 0.0008 + (targetRotationX - networkGlobe.rotation.x) * 0.05;
+            }
+            camera.position.x += (mouseX * 0.002 - camera.position.x) * 0.03;
+            camera.position.y += (mouseY * -0.002 - camera.position.y) * 0.03;
+            camera.lookAt(scene.position);
+
+            if (particles) {
+                particles.rotation.y += 0.0003;
+                particles.rotation.x += 0.0001;
+            }
+            renderer.render(scene, camera);
+        }
+
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2);
+                mouseY = (event.clientY - window.innerHeight / 2);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (renderer && camera) {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            }
+        });
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger) hamburger.classList.remove('active');
+                if (navMenu) navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll to section
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                // Only process navigation links if we are NOT in project view
+                // OR if it's a link to a section.
+                // But the showProject onclick handles project buttons.
+
+                if (targetId === '#' || targetId.startsWith('#project')) return; // Ignore empty or project
+
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll Active State
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.pageYOffset + 100;
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+        document.querySelectorAll('.skill-item, .project-card, .cert-item, .experience-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init3DBackground();
+            console.log('Portfolio loaded successfully!');
+        });
+
+        // CURSOR
+        const cursorDot = document.querySelector('.cursor-dot');
+        const trailCanvas = document.getElementById('cursor-trail');
+        if (cursorDot && trailCanvas && window.innerWidth > 768) {
+            const ctx = trailCanvas.getContext('2d');
+            let width = window.innerWidth, height = window.innerHeight;
+            trailCanvas.width = width; trailCanvas.height = height;
+            let trail = [], mouseX = 0, mouseY = 0, isHovering = false;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+                trail.push({ x: mouseX, y: mouseY, age: 0 });
+            });
+
+            window.addEventListener('resize', () => {
+                width = window.innerWidth; height = window.innerHeight;
+                trailCanvas.width = width; trailCanvas.height = height;
+            });
+
+            document.querySelectorAll('a, button, .btn-primary, .btn-view-project, .icon-minimal, .skill-tag, .project-card').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorDot.classList.add('hover'); isHovering = true; });
+                el.addEventListener('mouseleave', () => { cursorDot.classList.remove('hover'); isHovering = false; });
+            });
+
+            function animateTrail() {
+                ctx.clearRect(0, 0, width, height);
+                if (trail.length > 0) {
+                    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+                    for (let i = 0; i < trail.length; i++) trail[i].age++;
+                    trail = trail.filter(p => p.age < (isHovering ? 35 : 25));
+                    if (trail.length > 1) {
+                        for (let i = 0; i < trail.length - 1; i++) {
+                            const p1 = trail[i], p2 = trail[i + 1];
+                            const ratio = i / trail.length;
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.lineWidth = (isHovering ? 8 : 5) * ratio;
+                            ctx.strokeStyle = `rgba(160, 32, 240, ${ratio * 0.8})`;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateTrail);
+            }
+            animateTrail();
+        }
+    </script>
+</body>
+
+</html>

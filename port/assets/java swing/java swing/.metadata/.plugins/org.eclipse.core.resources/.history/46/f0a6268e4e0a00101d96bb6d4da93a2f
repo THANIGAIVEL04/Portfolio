@@ -1,0 +1,29 @@
+package swingpack;
+import javax.swing.*;
+import java.awt.event.*;
+public class s20 {
+    public static void main(String[] args) {      
+        JFrame frame = new JFrame("Swing Menu Example");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenu editMenu = new JMenu("Edit");
+        JMenu helpMenu = new JMenu("Help");
+        JMenuItem openItem = new JMenuItem("Open");
+        JMenuItem saveItem = new JMenuItem("Save");
+        JMenuItem exitItem = new JMenuItem("Exit");
+        exitItem.addActionListener(e -> System.exit(0));     
+        openItem.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Open clicked"));
+        saveItem.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Save clicked"));
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.addSeparator(); 
+        fileMenu.add(exitItem);     
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(helpMenu);    
+        frame.setJMenuBar(menuBar);
+        frame.setVisible(true);
+    }
+}

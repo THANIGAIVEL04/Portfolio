@@ -1,0 +1,117 @@
+package swingpack;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import javax.swing.*;
+
+public class T1 extends JFrame {
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField studentIdField;
+    private JComboBox<String> statusComboBox;
+    private JButton submitButton;
+    
+    public T1() {
+        setTitle("Mark Attendance");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 400, 300);
+
+        contentPane = new JPanel();
+        contentPane.setLayout(null);
+        setContentPane(contentPane);
+        
+        JLabel lblStudentId = new JLabel("Student ID:");
+        lblStudentId.setBounds(30, 30, 100, 25);
+        contentPane.add(lblStudentId);
+
+        studentIdField = new JTextField();
+        studentIdField.setBounds(140, 30, 150, 25);
+        contentPane.add(studentIdField);
+
+        JLabel lblStatus = new JLabel("Status:");
+        lblStatus.setBounds(30, 70, 100, 25);
+        contentPane.add(lblStatus);
+
+        statusComboBox = new JComboBox<>(new String[]{"Present", "Absent"});
+        statusComboBox.setBounds(140, 70, 150, 25);
+        contentPane.add(statusComboBox);
+
+        submitButton = new JButton("Submit");
+        submitButton.setBounds(140, 120, 100, 30);
+        contentPane.add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                submitAttendance();
+            }
+        });
+    }
+
+    private void submitAttendance() {
+        String studentId = studentIdField.getText().trim();
+        String status = (String) statusComboBox.getSelectedItem();
+        String className = "I BSc. CSCY";  // Replace with dynamic class selection
+        Date attendanceDate = new Date(System.currentTimeMillis());
+
+        if (studentId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Student ID cannot be empty.");
+            return;
+        }
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String studentName = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tamil", "root", "TAMILSELVAN@2006");
+
+            // Fetch student_name using student_id
+            String fetchNameSQL = "SELECT student_name FROM students WHERE student_id = ?";
+            pstmt = conn.prepareStatement(fetchNameSQL);
+            pstmt.setString(1, studentId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                studentName = rs.getString("student_name");
+            }
+
+            if (studentName == null) {
+                JOptionPane.showMessageDialog(this, "Student ID not found in database.");
+                return;
+            }
+
+            // Insert attendance record
+            String insertSQL = "INSERT INTO attendance (class, student_id, student_name, date, status) VALUES (?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(insertSQL);
+            pstmt.setString(1, className);
+            pstmt.setString(2, studentId);
+            pstmt.setString(3, studentName);
+            pstmt.setDate(4, attendanceDate);
+            pstmt.setString(5, status);
+            pstmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Attendance marked successfully!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (pstmt != null) pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+        }
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    T1 frame = new T1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}

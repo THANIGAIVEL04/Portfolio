@@ -1,0 +1,56 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class s22{
+    public static void main(String[] args) {
+        // Create frame
+        JFrame frame = new JFrame("Swing Components Example");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+
+        // Create label
+        JLabel label = new JLabel("Choose an option:");
+
+        // Create text field
+        JTextField textField = new JTextField(15);
+
+        // Create buttons
+        JButton btnHello = new JButton("Say Hello");
+        JButton btnClear = new JButton("Clear");
+
+        // Add ActionListener to "Say Hello" button
+        btnHello.addActionListener(e -> textField.setText("Hello, Swing!"));
+
+        // Add ActionListener to "Clear" button
+        btnClear.addActionListener(e -> textField.setText(""));
+
+        // Create a checkbox
+        JCheckBox checkBox = new JCheckBox("Check me!");
+
+        // Create a radio button group
+        JRadioButton radio1 = new JRadioButton("Option 1");
+        JRadioButton radio2 = new JRadioButton("Option 2");
+        ButtonGroup group = new ButtonGroup();
+        group.add(radio1);
+        group.add(radio2);
+
+        // Create a combo box (dropdown)
+        String[] choices = {"Red", "Blue", "Green"};
+        JComboBox<String> comboBox = new JComboBox<>(choices);
+
+        // Add components to frame
+        frame.add(label);
+        frame.add(textField);
+        frame.add(btnHello);
+        frame.add(btnClear);
+        frame.add(checkBox);
+        frame.add(radio1);
+        frame.add(radio2);
+        frame.add(comboBox);
+
+        // Make frame visible
+        frame.setVisible(true);
+    }
+}
