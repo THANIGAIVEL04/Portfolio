@@ -6,16 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Thanigaivel M L - Cybersecurity & Networking Enthusiast Portfolio">
     <title>Thanix | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="loader-logo">Portfolio<span class="dot">.</span></div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
     <!-- 3D Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
@@ -46,33 +56,33 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" data-aos="fade-in">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <p class="greeting">Hello,</p>
-                    <h1 class="hero-title">I'm Thanix</h1>
-                    <p class="hero-subtitle">Cybersecurity & Networking Enthusiast</p>
-                    <p class="hero-location">From Coimbatore, India</p>
-                    <a href="#contact" class="btn-primary">Hire Me</a>
+                    <p class="greeting" data-aos="fade-down" data-aos-delay="200">Hello,</p>
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">I'm Thanix</h1>
+                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="600">Cybersecurity & Networking
+                        Enthusiast</p>
+                    <p class="hero-location" data-aos="fade-up" data-aos-delay="800">From Coimbatore, India</p>
+                    <a href="#contact" class="btn-primary" data-aos="zoom-in" data-aos-delay="1000">Hire Me</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about" data-aos="fade-up">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <div class="about-image">
+                <div class="about-image" data-aos="fade-right" data-aos-delay="100">
                     <div class="glow-circle"></div>
                     <div class="profile-image">
-                        <img src="assets/my-photo.png" alt="Thanigaivel Profile Photo">
-                        <!-- <i class="fas fa-user-astronaut"></i> -->
+                        <div class="pfp" id="protected-profile-photo"></div>
                     </div>
                 </div>
-                <div class="about-text">
+                <div class="about-text" data-aos="fade-left" data-aos-delay="200">
                     <h3 class="about-subtitle"></h3>
                     <p class="about-description">
                         I'm an aspiring cybersecurity student with strong foundations in secure development,
@@ -84,19 +94,19 @@
                         practices, I'm passionate about building robust and secure systems. My journey in cybersecurity
                         combines theoretical knowledge with practical implementation across various domains.
                     </p>
-                    <a href="assets/Thanigaivel_New_Resume.pdf" class="btn-primary" download>Download Resume</a>
+                    <a href="assets/resume/Thanigaivel_New_Resume.pdf" class="btn-primary" download>Download Resume</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <section id="skills" class="skills" data-aos="fade-up">
         <div class="container">
             <h2 class="section-title">My Skills</h2>
             <div class="skills-dropdown-container">
                 <!-- Programming -->
-                <div class="skill-dropdown-item">
+                <div class="skill-dropdown-item" data-aos="fade-right" data-aos-delay="100">
                     <h3 class="skill-dropdown-title">Programming</h3>
                     <div class="skill-dropdown-box">
                         <p class="skill-dropdown-text">C | C++ | Python | Java</p>
@@ -104,7 +114,7 @@
                 </div>
 
                 <!-- Tools -->
-                <div class="skill-dropdown-item">
+                <div class="skill-dropdown-item" data-aos="fade-right" data-aos-delay="200">
                     <h3 class="skill-dropdown-title">Tools</h3>
                     <div class="skill-dropdown-box">
                         <p class="skill-dropdown-text">Wireshark | Burp Suite | VS Code</p>
@@ -112,7 +122,7 @@
                 </div>
 
                 <!-- Operating System -->
-                <div class="skill-dropdown-item">
+                <div class="skill-dropdown-item" data-aos="fade-right" data-aos-delay="300">
                     <h3 class="skill-dropdown-title">Operating System</h3>
                     <div class="skill-dropdown-box">
                         <p class="skill-dropdown-text">Linux | Windows</p>
@@ -120,7 +130,7 @@
                 </div>
 
                 <!-- Scripting -->
-                <div class="skill-dropdown-item">
+                <div class="skill-dropdown-item" data-aos="fade-right" data-aos-delay="400">
                     <h3 class="skill-dropdown-title">Scripting</h3>
                     <div class="skill-dropdown-box">
                         <p class="skill-dropdown-text">Bash</p>
@@ -131,11 +141,11 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="experience">
+    <section id="experience" class="experience" data-aos="fade-up">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="experience-standalone">
-                <div class="experience-item">
+                <div class="experience-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="experience-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
@@ -153,11 +163,11 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
+    <section id="certifications" class="certifications" data-aos="fade-up">
         <div class="container">
             <h2 class="section-title">Certifications</h2>
             <div class="certifications-list">
-                <div class="cert-item">
+                <div class="cert-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="cert-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
@@ -166,7 +176,7 @@
                         <p>Cisco</p>
                     </div>
                 </div>
-                <div class="cert-item">
+                <div class="cert-item" data-aos="fade-up" data-aos-delay="200">
                     <div class="cert-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
@@ -175,7 +185,7 @@
                         <p>Cisco</p>
                     </div>
                 </div>
-                <div class="cert-item">
+                <div class="cert-item" data-aos="fade-up" data-aos-delay="300">
                     <div class="cert-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
@@ -184,7 +194,7 @@
                         <p>Prompt Infotech</p>
                     </div>
                 </div>
-                <div class="cert-item">
+                <div class="cert-item" data-aos="fade-up" data-aos-delay="400">
                     <div class="cert-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
@@ -193,7 +203,7 @@
                         <p>IIT Bombay</p>
                     </div>
                 </div>
-                <div class="cert-item">
+                <div class="cert-item" data-aos="fade-up" data-aos-delay="500">
                     <div class="cert-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
@@ -207,20 +217,26 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="projects" class="projects" data-aos="fade-up">
         <div class="container">
             <h2 class="section-title">My Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-icon">
                         <i class="fas fa-user-check"></i>
                     </div>
                     <h3>College Attendance Portal</h3>
                     <p>A comprehensive attendance management system built with Java Swing and MySQL,
                         featuring student tracking, report generation, and administrative controls.</p>
-                    <a href="project-attendance.html" class="btn-view-project">View Project</a>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java Swing</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">JDBC</span>
+                        <span class="tech-tag">Desktop App</span>
+                    </div>
+                    <a href="assets/projects/project-attendance.html" class="btn-view-project">View Project</a>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
@@ -228,14 +244,20 @@
                     <p>A research-oriented transport layer protocol designed to provide transparent network behavior
                         visibility, real-time observability of traffic flow, and improved understanding of congestion
                         conditions. Built for academic and experimental analysis of transport protocol behavior.</p>
-                    <a href="project-ctrp.html" class="btn-view-project">View Project</a>
+                    <div class="project-tech">
+                        <span class="tech-tag">Rust</span>
+                        <span class="tech-tag">Networking</span>
+                        <span class="tech-tag">Protocol Design</span>
+                        <span class="tech-tag">Research</span>
+                    </div>
+                    <a href="assets/projects/project-ctrp.html" class="btn-view-project">View Project</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" data-aos="fade-up">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
             <div class="contact-content">
@@ -257,7 +279,17 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 
 </html>

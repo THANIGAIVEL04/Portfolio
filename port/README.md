@@ -29,15 +29,19 @@ Visit the live portfolio: [https://THANIGAIVEL04.github.io/portfolio](https://TH
 ```
 portfolio/
 ├── index.html              # Main homepage
-├── style.css               # Main stylesheet
-├── script.js               # JavaScript for interactions
-├── project-attendance.html # Attendance Portal project page
-├── project-ctrp.html       # CTRP project page
-├── project-demo.html       # Demo project page
-├── assets/
-│   ├── my-photo.png        # Profile photo
-│   └── Thanigaivel_New_Resume.pdf  # Resume PDF
-└── README.md               # This file
+├── README.md               # This file
+└── assets/
+    ├── css/
+    │   └── style.css       # Main stylesheet
+    ├── js/
+    │   └── script.js       # JavaScript for interactions
+    ├── images/
+    │   └── my-photo.png    # Protected profile photo
+    ├── projects/
+    │   ├── project-attendance.html  # Attendance Portal project page
+    │   └── project-ctrp.html        # CTRP project page
+    └── resume/
+        └── Thanigaivel_New_Resume.pdf  # Resume PDF
 ```
 
 ## 🛠️ Technologies Used
@@ -132,20 +136,20 @@ To customize this portfolio for your own use:
 
 1. **Update Personal Information**:
    - Edit `index.html` with your name, bio, and details
-   - Replace profile photo in `assets/my-photo.png`
-   - Update resume in `assets/Thanigaivel_New_Resume.pdf`
+   - Replace profile photo in `assets/images/my-photo.png`
+   - Update resume in `assets/resume/Thanigaivel_New_Resume.pdf`
 
 2. **Modify Colors**:
-   - Edit CSS variables in `style.css` (lines 4-16)
+   - Edit CSS variables in `assets/css/style.css`
    - Change `--orange-primary` for accent color
 
 3. **Add/Remove Sections**:
    - Edit HTML structure in `index.html`
-   - Update corresponding CSS in `style.css`
+   - Update corresponding CSS in `assets/css/style.css`
 
 4. **Update Projects**:
    - Modify project cards in the Projects section
-   - Create new project detail pages as needed
+   - Create new project detail pages in `assets/projects/`
 
 ## 📄 License
 
